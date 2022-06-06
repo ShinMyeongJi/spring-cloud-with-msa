@@ -12,6 +12,7 @@ spring:
           uri: https://github.com/ShinMyeongJi/spring-cloud-with-msa.git
           basedir: config
           search-paths: dev, stg, prod
+          default-label: main
 
 
 # 기본적인 acutator의 기본 엔드 포인트가 false로 설정되고, 아래 endpoint 정보에 의해 특정 정보만 true로 세팅한다.
