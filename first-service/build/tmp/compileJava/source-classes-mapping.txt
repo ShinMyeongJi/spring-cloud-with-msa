@@ -1,2 +1,0 @@
-com/shinmj/firstservice/FirstServiceApplication.java
- com.shinmj.firstservice.FirstServiceApplication

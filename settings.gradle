@@ -1,5 +1,5 @@
-rootProject.name = 'msa-challenge'
+rootProject.name = 'msa'
 
-include 'discoveryservice'
 include 'config-service'
-include 'first-service'
+include 'discovery-service'
+

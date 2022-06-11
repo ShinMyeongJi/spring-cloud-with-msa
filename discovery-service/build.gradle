@@ -1,0 +1,11 @@
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:3.0.4'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // spring boot와 spring cloud의 버전 호환 문제라...
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+
+}
