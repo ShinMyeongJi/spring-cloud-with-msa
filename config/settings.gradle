@@ -1,0 +1,5 @@
+rootProject.name = 'msa'
+
+include 'config-service'
+include 'discovery-service'
+
