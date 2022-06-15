@@ -1,16 +1,17 @@
+server:
+  port: 8089
+security:
+  oauth2:
+    client:
+      client-id: auth_id
+      client-secret: auth_secret
+    resource:
+      jwt:
+        key-value: jwt_secret_key
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-
   datasource:
-    url: jdbc:h2:~/test
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-    initialization-mode: always
-
-  sql:
-    init:
-      mode: always
+    url: jdbc:postgresql://localhost:5432/postgres
+    platform: postgresql
+    driver-class-name: org.postgresql.Driver
+    username: home
+    password: postgres
