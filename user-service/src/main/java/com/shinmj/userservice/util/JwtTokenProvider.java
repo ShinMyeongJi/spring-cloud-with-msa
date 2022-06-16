@@ -1,10 +1,12 @@
 package com.shinmj.userservice.util;
 
 import io.jsonwebtoken.*;
+import io.micrometer.core.instrument.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -44,6 +46,16 @@ public class JwtTokenProvider {
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS512, TOKEN_SECRET)
                 .compact();
+    }
+
+    public String resolveToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+
+        if (StringUtils.isNotEmpty(bearerToken) && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring("Bearer ".length());
+        }
+
+        return null;
     }
 
     public String getUserId(String token) {
