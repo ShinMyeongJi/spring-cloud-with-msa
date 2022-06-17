@@ -2,8 +2,13 @@ package com.shinmj.userservice.util;
 
 import io.jsonwebtoken.*;
 import io.micrometer.core.instrument.util.StringUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +18,7 @@ import java.util.UUID;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class JwtTokenProvider {
 
     @Value("${token.access-expired-time}")
@@ -23,6 +29,8 @@ public class JwtTokenProvider {
 
     @Value("${token.secret}")
     private String TOKEN_SECRET;
+
+    private final UserDetailsService userDetailsService;
 
     public String createJwtAccessToken(String userId, String uri, List<String> roles) {
         Claims claims = Jwts.claims().setSubject(userId);
@@ -62,6 +70,13 @@ public class JwtTokenProvider {
         return getClaimsFromJwtToken(token).getSubject();
     }
 
+    public Authentication getAuthentication(String token) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(getUserId(token));
+
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+
+
     public String refreshTokenId(String token) {
         return getClaimsFromJwtToken(token).get("value").toString();
     }
@@ -70,12 +85,23 @@ public class JwtTokenProvider {
         return (List<String>) getClaimsFromJwtToken(token).get("roles");
     }
 
-    public void validateJwtToken(String token) {
+    public boolean validateJwtToken(String token) {
         try{
             Jwts.parser().setSigningKey(TOKEN_SECRET).parseClaimsJws(token);
-        }catch (SignatureException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException | ExpiredJwtException jwtException) {
-            throw jwtException;
+            return true;
+        } catch (SignatureException ex) {
+            log.error("Invalid JWT signature");
+        } catch (MalformedJwtException ex) {
+            log.error("Invalid JWT token");
+        } catch (ExpiredJwtException ex) {
+            log.error("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            log.error("Unsupported JWT token");
+        } catch (IllegalArgumentException ex) {
+            log.error("JWT claims string is empty.");
         }
+
+        return false;
     }
 
     private Claims getClaimsFromJwtToken(String token) {

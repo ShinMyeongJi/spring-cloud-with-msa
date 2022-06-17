@@ -1,13 +1,13 @@
 package com.shinmj.userservice.domain.repository;
 
-import com.shinmj.userservice.domain.User;
+import com.shinmj.userservice.domain.UserDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<UserDto, String> {
 
-    Optional<User> findById(String id);
+    Optional<UserDto> findById(String id);
 }
