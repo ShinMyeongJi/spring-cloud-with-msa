@@ -1,7 +1,7 @@
 package com.shinmj.userservice.domain;
 
-import lombok.Builder;
 import lombok.Data;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Data
 @Table(name = "USER")
 @Entity
-public class UserDto {
+public class UserDto{
 
     @Id
     @Column(name = "id", length=20)
@@ -22,4 +22,7 @@ public class UserDto {
 
     @Column
     private String name;
+
+    @Column
+    private String role;
 }
