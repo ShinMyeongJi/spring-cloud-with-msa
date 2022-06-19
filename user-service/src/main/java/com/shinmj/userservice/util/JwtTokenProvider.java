@@ -21,14 +21,14 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class JwtTokenProvider {
 
-    @Value("${token.access-expired-time}")
-    private long ACCESS_EXPIRED_TIME;
+    //@Value("${token.access-expired-time}")
+    private long ACCESS_EXPIRED_TIME = 60 * 60 * 2000L;
 
-    @Value("${token.refresh-expired-time}")
-    private long REFRESH_EXPIRED_TIME;
+    //@Value("${token.refresh-expired-time}")
+    private long REFRESH_EXPIRED_TIME = 14 * 24 * 60 * 60 * 1000L;
 
-    @Value("${token.secret}")
-    private String TOKEN_SECRET;
+    //@Value("${token.secret}")
+    private String TOKEN_SECRET = "jwt-secret";
 
     private final UserDetailsService userDetailsService;
 

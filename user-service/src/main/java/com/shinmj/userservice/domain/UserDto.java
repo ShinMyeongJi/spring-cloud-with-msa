@@ -24,5 +24,5 @@ public class UserDto{
     private String name;
 
     @Column
-    private String role;
+    private String role = "user";
 }

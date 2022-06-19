@@ -2,11 +2,12 @@ package com.shinmj.userservice.domain.repository;
 
 import com.shinmj.userservice.domain.UserDto;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-//@Repository
+@Repository
 public interface UserRepository extends CrudRepository<UserDto, String> {
-    UserDto findUserDtoBy(String id);
+    //UserDto findUserDtoBy(String id);
     Optional<UserDto> findById(String id);
 }
