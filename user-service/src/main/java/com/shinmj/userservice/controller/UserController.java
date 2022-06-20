@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RequestMapping(UserController.URL_PREFIX)
 public class UserController {
-    final static String URL_PREFIX = "/user";
+    final static String URL_PREFIX = "/auth";
     private final UserRepository userRepository;
 
     private final AuthenticationManager authenticationManager;
 
     @RequestMapping(
             path = "/join",
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
 
     )
@@ -44,7 +44,7 @@ public class UserController {
 
     @RequestMapping(
             path = "/login",
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public String login(@RequestBody JwtRequestDto request) throws Exception {
