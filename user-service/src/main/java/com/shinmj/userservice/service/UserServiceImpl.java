@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(userDto);
     }
 
+    // 토큰에 포함된 유저 정보로 유저를 조회
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
