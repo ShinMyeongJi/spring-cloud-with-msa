@@ -1,6 +1,5 @@
 package com.shinmj.userservice.service;
 
-import com.shinmj.userservice.domain.UserDetailsImpl;
 import com.shinmj.userservice.domain.UserDto;
 import com.shinmj.userservice.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -28,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
         UserDto user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
 
-        return new UserDetailsImpl(user);
+        return user;
         //return new User(user.get().getId(), user.get().getEncrypt_pw());
     }
 

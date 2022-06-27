@@ -1,11 +1,8 @@
 package com.shinmj.userservice.controller;
 
-import com.shinmj.userservice.domain.UserDetailsImpl;
 import com.shinmj.userservice.domain.UserDto;
-import com.shinmj.userservice.domain.UserJoinRequestDto;
 import com.shinmj.userservice.domain.jwt.JwtRequestDto;
 import com.shinmj.userservice.domain.repository.UserRepository;
-import com.shinmj.userservice.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -53,7 +50,7 @@ public class UserController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        UserDetailsImpl principal = (UserDetailsImpl) authentication.getPrincipal();
+        UserDto principal = (UserDto) authentication.getPrincipal();
         return principal.getUsername();
     }
 
