@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+version 'unspecified'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.4'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
