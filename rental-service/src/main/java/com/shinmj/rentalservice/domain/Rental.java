@@ -80,9 +80,51 @@ public class Rental implements Serializable {
         return true;
     }
 
-    public Rental addRentalItem(RentedItem rentedItem) {
+    // 대출 아이템 추가
+    public Rental addRentedItem(RentedItem rentedItem) {
         this.rentedItems.add(rentedItem);
         rentedItem.setRental(this); // <- 굳이 왜..?
+
+        return this;
+    }
+
+    // 대출 아이템 삭제
+    public Rental removeRentalItem(RentedItem rentedItem) {
+        this.rentedItems.remove(rentedItem);
+        rentedItem.setRental(this);
+
+        return this;
+    }
+
+    // 반납 아이템 추가
+    public Rental addReturnedItem(ReturnedItem returnedItem) {
+        this.returnedItems.add(returnedItem);
+        returnedItem.setRental(this);
+
+        return this;
+    }
+
+    // 반납 아이템 삭제
+    public Rental removeReturnedItem(ReturnedItem returnedItem) {
+        this.returnedItems.remove(returnedItem);
+        returnedItem.setRental(this);
+
+        return this;
+    }
+
+
+    // 연체 아이템 추가
+    public Rental addOverdueItem(OverdueItem overdueItem) {
+        this.overdueItems.add(overdueItem);
+        overdueItem.setRental(this);
+
+        return this;
+    }
+
+    // 연체 아이템 제거
+    public Rental removeOverdueItem(OverdueItem overdueItem) {
+        this.overdueItems.remove(overdueItem);
+        overdueItem.setRental(this);
 
         return this;
     }
@@ -90,9 +132,51 @@ public class Rental implements Serializable {
 
     // 대출 처리 메서드
     public Rental rentBook(Long bookId, String title) {
-        this.addRentalItem(RentedItem.createRentedItem(bookId, title, LocalDate.now()));
+        this.addRentedItem(RentedItem.createRentedItem(bookId, title, LocalDate.now()));
         return this;
     }
 
+    // 반납 처리 메서드
+    public Rental returnBook(Long bookId) {
+        RentedItem rentedItem = this.rentedItems.stream().filter(item -> item.getBookId().equals(bookId)).findFirst().get(); // TODO 엥 Find-First?
+        this.addReturnedItem(ReturnedItem.createReturnedItem(bookId, rentedItem.getBookTitle(), LocalDate.now()));
+        this.rentedItems.remove(rentedItem);
+
+        return this;
+    }
+
+    // 연체 처리 메서드
+    public Rental overdueBook(Long bookId) {
+        RentedItem rentedItem = this.rentedItems.stream().filter(item -> item.getBookId().equals(bookId)).findFirst().get();
+        this.addOverdueItem(OverdueItem.createOverdueItem(rentedItem.getBookId(), rentedItem.getBookTitle(), rentedItem.getDueDate()));
+        this.removeRentalItem(rentedItem);
+
+        return this;
+    }
+
+    // 연체 도서 반납 처리 메서드
+    public Rental returnOverdueBook(Long bookId) {
+        OverdueItem overdueItem = this.overdueItems.stream().filter(item -> item.getBookId().equals(bookId)).findFirst().get();
+        this.addReturnedItem(ReturnedItem.createReturnedItem(overdueItem.getBookId(), overdueItem.getBookTitle(), LocalDate.now()));
+        this.removeOverdueItem(overdueItem);
+
+        return this;
+    }
+
+    // 대출 불가 처리 메서드
+    public Rental makeRentalUnable() {
+        this.setRentalStatus(RentalStatus.RENTAL_UNAVALIABLE);
+        this.setLateFee(this.getLateFee() + 30);
+
+        return this;
+    }
+
+    // 대출 불가 해제 메서드
+    public Rental makeRentalAble() {
+        this.setRentalStatus(RentalStatus.RENTAL_AVALIABLE);
+        this.setLateFee(0l);
+
+        return this;
+    }
 
 }

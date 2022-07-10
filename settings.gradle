@@ -7,4 +7,6 @@ include 'apigateway'
 include 'second-service'
 include 'user-service'
 include 'rental-service'
+include 'book-service'
+include 'user-service-with-jhipster'
 

@@ -1,8 +1,9 @@
 package com.shinmj.rentalservice.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -10,19 +11,28 @@ import java.time.LocalDate;
 @Entity
 public class ReturnedItem implements Serializable {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @Column(name = "book_id")
     private Long bookId;
 
-    private String title;
+    @Column(name = "book_title")
+    private String bookTitle;
 
+    @Column(name = "returned_date")
     private LocalDate returnedDate;
+
+    @ManyToOne
+    @JsonIgnoreProperties
+    private Rental rental;
 
     public static ReturnedItem createReturnedItem(Long bookId, String title, LocalDate now){
         ReturnedItem returnedItem = new ReturnedItem();
 
         returnedItem.setBookId(bookId);
-        returnedItem.setTitle(title);
+        returnedItem.setBookTitle(title);
         returnedItem.setReturnedDate(now);
 
         return returnedItem;

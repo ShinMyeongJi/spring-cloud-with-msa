@@ -14,4 +14,7 @@ public interface RentalService {
 
     // 도서 대출
     Rental rentBook(Long userId, Long bookId, String bookTitle);
+
+    // 도서 반납
+    Rental returnBooks(Long userId, Long bookId);
 }

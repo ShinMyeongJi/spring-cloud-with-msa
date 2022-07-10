@@ -17,6 +17,7 @@ public class RentalServiceImpl implements RentalService {
 
 
     @Override
+    @Transactional
     public Rental rentBook(Long userId, Long bookId, String bookTitle) {
 
         Rental rental = rentalRepository.findById(userId).get(); // (1) Rental 조회
@@ -37,6 +38,23 @@ public class RentalServiceImpl implements RentalService {
          * 외부 마이크로 서비스로 이벤트를 전송할 때는 의존성을 낮추기 위해 비동기로 호출하는데, 비동기 이벤트를 처리하기 위해 아웃바운드 어댑터를 호출한다.
          * 여기서 아웃바운드 어댑터 클래스를 직접 호출하지 않고 아웃바운드 어댑터의 행위가 추상화된 인터페이스 클래스에 의존한다는 점에 주목하자.
          */
+        return rental;
+    }
+
+    @Override
+    public Rental returnBooks(Long userId, Long bookId) {
+        Rental rental = rentalRepository.findById(userId).get();
+
+        rental.returnBook(bookId);
+        rentalRepository.save(rental);
+
+
+        // 도서 서비스에 도서재고 증가를 위해 도서반납 이벤트 발송
+        //rentalProducer.updateBookStatus(bookId, "AVAILABLE");
+
+        // 도서 카탈로그 서비스에 대출 가능한 도서로 상태를 변경하기 위한 이벤트 발송
+        //rentalProducer.updateBookCatalogStatus(bookId, "RETURN_BOOK");
+
         return rental;
     }
 }

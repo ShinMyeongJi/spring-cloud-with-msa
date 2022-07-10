@@ -19,8 +19,6 @@ import java.util.Collection;
 @Data
 @Table(name = "user", schema = "public")
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class UserDto implements UserDetails{
 
     @Id
