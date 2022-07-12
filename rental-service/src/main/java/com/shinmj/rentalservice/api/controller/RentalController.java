@@ -30,7 +30,7 @@ public class RentalController extends RestControllerBase {
 
     /**
      *
-     * @param userid
+     * @param userId
      * @param bookId
      * @return
      * @throws InterruptedException
@@ -38,19 +38,20 @@ public class RentalController extends RestControllerBase {
      * @throws JsonProcessingException
      * @throws RentUnavailableException
      */
-    @PostMapping("/rentals/{userid}/RentedItem/{book}")
-    public ResponseEntity<RentalDTO> rentBooks(@PathVariable("userid") Long userid, @PathVariable("book") Long bookId)
+    @PostMapping("/{userId}/RentedItem/{book}")
+    public ResponseEntity<RentalDTO> rentBooks(@PathVariable("userId") Long userId, @PathVariable("book") Long bookId)
             throws InterruptedException, ExecutionException, JsonProcessingException, RentUnavailableException {
         // 도서 서비스를 호출해 도서 정보 가져오기
 
         ResponseEntity<BookInfoDTO> bookInfoResult = bookClient.findBookInfo(bookId); // feign - 책 정보 가져오기
         BookInfoDTO bookInfoDTO = bookInfoResult.getBody();
 
-        Rental rental = rentalService.rentBook(userid, bookInfoDTO.getId(), bookInfoDTO.getTitle());
+        Rental rental = rentalService.rentBook(userId, bookInfoDTO.getId(), bookInfoDTO.getTitle());
         //RentalDTO rentalDTO = rentalMapper.toDto(rental);
         return ResponseEntity.ok().body(rentalDTO);
     }
-    
+
+
     
 
 }

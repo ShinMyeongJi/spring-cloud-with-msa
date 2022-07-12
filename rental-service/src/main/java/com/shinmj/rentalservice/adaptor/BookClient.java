@@ -1,5 +1,6 @@
 package com.shinmj.rentalservice.adaptor;
 
+import com.shinmj.rentalservice.api.dto.BookInfoDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
