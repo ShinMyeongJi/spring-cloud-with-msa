@@ -6,8 +6,6 @@ com/shinmj/userservice/domain/jwt/JwtRequestDto.java
  com.shinmj.userservice.domain.jwt.JwtRequestDto
 com/shinmj/userservice/filter/JwtAuthenticationFilter.java
  com.shinmj.userservice.filter.JwtAuthenticationFilter
-com/shinmj/userservice/domain/UserDetailsImpl.java
- com.shinmj.userservice.domain.UserDetailsImpl
 com/shinmj/userservice/domain/UserDto.java
  com.shinmj.userservice.domain.UserDto
 com/shinmj/userservice/util/JwtTokenProvider.java
@@ -20,6 +18,8 @@ com/shinmj/userservice/config/SecurityConfig.java
  com.shinmj.userservice.config.SecurityConfig
 com/shinmj/userservice/domain/repository/UserRepository.java
  com.shinmj.userservice.domain.repository.UserRepository
+com/shinmj/userservice/exception/LoginFailedException.java
+ com.shinmj.userservice.exception.LoginFailedException
 com/shinmj/userservice/service/UserServiceImpl.java
  com.shinmj.userservice.service.UserServiceImpl
 com/shinmj/userservice/controller/UserController.java

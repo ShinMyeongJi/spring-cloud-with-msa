@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -37,15 +38,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().disable()
                 .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // JWT를 사용할 것이니 세션 필요 x
+                .and()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("USER")
-                .anyRequest().permitAll()
+                .antMatchers("/auth/**").permitAll()
+                //.anyRequest().permitAll()
+                .anyRequest().hasRole("USER")
                 .and()
         .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
                 //.and()
                 //.addFilterBefore(new
-        //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         /*http.authorizeRequests().antMatchers("/**")
                 .hasIpAddress(env.getProperty("gateway.ip")) // <- IP 변경
