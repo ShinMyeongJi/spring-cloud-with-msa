@@ -27,6 +27,7 @@ subprojects {
 
 	dependencies {
 
+		implementation 'org.springframework.boot:spring-boot-starter'
 		implementation 'org.springframework.boot:spring-boot-starter-web'
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -37,5 +38,8 @@ subprojects {
 		//actuator
 		implementation 'org.springframework.boot:spring-boot-starter-actuator:2.1.8.RELEASE'
 		implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-bootstrap', version: '3.0.4'
+
+		developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 	}
 }

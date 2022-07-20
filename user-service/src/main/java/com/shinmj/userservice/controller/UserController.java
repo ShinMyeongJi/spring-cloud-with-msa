@@ -4,11 +4,7 @@ import com.shinmj.userservice.domain.UserDto;
 import com.shinmj.userservice.domain.jwt.JwtRequestDto;
 import com.shinmj.userservice.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.MediaType;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(UserController.URL_PREFIX)
 public class UserController {
     final static String URL_PREFIX = "/auth";
-    private final UserRepository userRepository;
+
+
+
+    /*private final UserRepository userRepository;
 
     private final AuthenticationManager authenticationManager;
 
@@ -52,7 +51,7 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDto principal = (UserDto) authentication.getPrincipal();
         return principal.getUsername();
-    }
+    }*/
 
 
 }

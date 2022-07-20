@@ -1,5 +1,5 @@
 server:
-  port: 8089
+  port: 8000
 security:
   oauth2:
     client:
@@ -15,4 +15,5 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: home
     password: postgres
-
+  application:
+    name: user-service
