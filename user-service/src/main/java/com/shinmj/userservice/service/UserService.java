@@ -1,3 +1,4 @@
+/*
 package com.shinmj.userservice.service;
 
 import com.shinmj.userservice.domain.UserDto;
@@ -8,3 +9,4 @@ public interface UserService extends UserDetailsService {
     public UserDto createUser(UserDto userDto);
 
 }
+*/

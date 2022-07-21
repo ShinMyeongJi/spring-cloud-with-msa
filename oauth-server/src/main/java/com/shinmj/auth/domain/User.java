@@ -1,11 +1,8 @@
-/*
-package com.shinmj.userservice.domain;
+package com.shinmj.auth.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.shinmj.userservice.common.Constants;
-import lombok.AllArgsConstructor;
+import com.shinmj.auth.common.Constants;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,23 +14,22 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Data
-@Table(name = "user", schema = "public")
 @Entity
-public class UserDto implements UserDetails{
+@Table(name="user")
+@Data
+public class User implements UserDetails {
 
     @Id
-    @Column(name = "id", length=20)
     private String id;
 
-    @Column
-    private String encrypt_pw;
-
-    @Column
+    @Column(name="name", length = 10, nullable = false)
     private String name;
 
-    @Column
-    private String role = "user";
+    @Column(name="encrypt_pw", length = 20, nullable = false)
+    private String encryptPw;
+
+    @Column(name="role", length = 30)
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -49,7 +45,7 @@ public class UserDto implements UserDetails{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public String getPassword() {
-        return this.encrypt_pw;
+        return this.encryptPw;
     }
 
     @Override
@@ -81,4 +77,3 @@ public class UserDto implements UserDetails{
         return true;
     }
 }
-*/

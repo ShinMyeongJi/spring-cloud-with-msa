@@ -1,8 +1,5 @@
 package com.shinmj.userservice.controller;
 
-import com.shinmj.userservice.domain.UserDto;
-import com.shinmj.userservice.domain.jwt.JwtRequestDto;
-import com.shinmj.userservice.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.RequestBody;

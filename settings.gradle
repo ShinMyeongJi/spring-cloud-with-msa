@@ -9,4 +9,5 @@ include 'user-service'
 include 'rental-service'
 include 'book-service'
 include 'user-service-with-jhipster'
+include 'oauth-server'
 
