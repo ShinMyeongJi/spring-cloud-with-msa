@@ -17,17 +17,17 @@ public class DataInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-       // User user = new User();
+        User user = new User();
 
 
         System.out.println(WebSecurityConfig.passwordEncoder().encode("1234"));
 
-        //user.setId("tester");
-        //user.setEncryptPw(WebSecurityConfig.passwordEncoder().encode("1234")); // 될까;;?
-        //user.setName("tester");
-        //user.setRole("USER");
+        user.setId("tester");
+        user.setEncryptPw(WebSecurityConfig.passwordEncoder().encode("1234")); // 될까;;?
+        user.setName("tester");
+        user.setRole("USER");
 
-        //userRepository.save(user);
+        userRepository.save(user);
 
     }
 }

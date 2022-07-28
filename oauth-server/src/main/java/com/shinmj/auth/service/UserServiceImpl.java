@@ -34,6 +34,4 @@ public class UserServiceImpl implements UserService {
         return user;
         //return new User(user.get().getId(), user.get().getEncrypt_pw());
     }
-
-
 }

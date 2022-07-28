@@ -1,9 +1,9 @@
 com/shinmj/auth/common/Constants.java
  com.shinmj.auth.common.Constants
-com/shinmj/auth/AuthServiceApplication.java
- com.shinmj.auth.AuthServiceApplication
 com/shinmj/auth/config/AuthorizationConfig.java
  com.shinmj.auth.config.AuthorizationConfig
+com/shinmj/auth/init/DataInitializer.java
+ com.shinmj.auth.init.DataInitializer
 com/shinmj/auth/domain/User.java
  com.shinmj.auth.domain.User
 com/shinmj/auth/service/UserServiceImpl.java
@@ -14,5 +14,5 @@ com/shinmj/auth/domain/repository/UserRepository.java
  com.shinmj.auth.domain.repository.UserRepository
 com/shinmj/auth/config/WebSecurityConfig.java
  com.shinmj.auth.config.WebSecurityConfig
-com/shinmj/auth/init/DataInitializer.java
- com.shinmj.auth.init.DataInitializer
+com/shinmj/auth/AuthServiceApplication.java
+ com.shinmj.auth.AuthServiceApplication
